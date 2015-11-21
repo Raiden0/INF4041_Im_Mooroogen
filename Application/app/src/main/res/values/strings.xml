@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Application</string>
+    <string name="action_settings">Settings</string>
+    <string name="obj">OBJECTIF A ATTEINDRE</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="title_activity_add_paid">AddPaidActivity</string>
+    <string name="title_activity_def_objectif">DefObjectifActivity</string>
+</resources>
