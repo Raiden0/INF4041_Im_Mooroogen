@@ -1,6 +1,7 @@
 package org.esiea.im_mooroogen.application;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,9 @@ public class ObjectifActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "DancingScript-Regular.ttf");
+        TextView budget = (TextView) findViewById(R.id.textView);
+        budget.setTypeface(typeface);
 
         TextView hist_btn = (TextView) findViewById(R.id.history_button);
         hist_btn.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,2 @@
-Symfony
-=======
-
-A Symfony project created on October 27, 2015, 10:29 am.
+An Android application created by IM Rémy & MOOROOGEN Daren
+Application de gestion de bugdet

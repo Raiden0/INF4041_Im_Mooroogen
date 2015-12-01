@@ -26,8 +26,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public static final String DEPENSE_TABLE_DROP = "DROP TABLE IF EXISTS " + DEPENSE_TABLE_NAME + ";";
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL(DEPENSE_TABLE_DROP);
+        onCreate(db);
     }
 }
