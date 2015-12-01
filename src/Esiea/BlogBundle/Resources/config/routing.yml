@@ -1,3 +1,0 @@
-esiea_blog_homepage:
-    path:    /
-    defaults:    {_controller:EsieaBlogBundle:Default:index,name:Remy} 
