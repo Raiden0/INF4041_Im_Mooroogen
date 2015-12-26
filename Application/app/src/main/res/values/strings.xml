@@ -7,4 +7,6 @@
     <string name="title_activity_def_objectif">DefObjectifActivity</string>
     <string name="hist">Historique</string>
     <string name="addObj">Ajouter un paiement</string>
+    <string name="depense">Dépense</string>
+    <string name="montant">10.00</string>
 </resources>

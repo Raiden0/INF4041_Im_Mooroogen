@@ -66,15 +66,6 @@ public class ObjectifActivity extends AppCompatActivity {
             return true;
         }
 
-        /*TextView hist = (TextView) findViewById(R.id.history_button);
-        hist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentHist = new Intent(getApplicationContext(), HistoryActivity.class);
-                startActivity(intentHist);
-            }
-        });*/
-
         return super.onOptionsItemSelected(item);
     }
 }
