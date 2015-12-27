@@ -1,5 +1,6 @@
 package org.esiea.im_mooroogen.application;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -60,9 +61,15 @@ public class ObjectifActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        final Context context = getApplicationContext();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.action_download) {
+            GetTransaction.startActionGet(context);
             return true;
         }
 

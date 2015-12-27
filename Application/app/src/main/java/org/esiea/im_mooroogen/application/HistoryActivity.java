@@ -1,13 +1,10 @@
 package org.esiea.im_mooroogen.application;
 
-import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,20 +12,27 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.w3c.dom.Text;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class HistoryActivity extends AppCompatActivity {
+
+    public static final String BIERS_UPDATE = "com.octip.cours.inf4042_11.BIERS_UPDATE";
+    private static final String TAG = "TAG";
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private JSONArray mJsonArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,33 +53,62 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
 
+        IntentFilter intentFilter = new IntentFilter(BIERS_UPDATE);
+        LocalBroadcastManager.getInstance(this).registerReceiver(new BierUpdate(), intentFilter);
+
+        mJsonArray = getMontantFromFile();
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new MyAdapter(mJsonArray);
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
+    public class BierUpdate extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG,getIntent().getAction());
+
+        }
+    }
+
+    public JSONArray getMontantFromFile() {
+        try {
+            InputStream is = new FileInputStream(getCacheDir()+"/"+"bieres.json");
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            is.close();
+            return new JSONArray(new String(buffer,"UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new JSONArray();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new JSONArray();
+        }
     }
 
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-        private  JSONArray jsonArray;
+        private JSONArray jsonArray;
 
         public MyAdapter(JSONArray jsonArray) {
-            jsonArray = this.jsonArray;
+            this.jsonArray = jsonArray;
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mTextView;
-            public ViewHolder(TextView textView) {
+            private final TextView mTextView;
+            public ViewHolder(View textView) {
                 super(textView);
-                mTextView = textView;
+                mTextView = (TextView) textView.findViewById(R.id.rv_transaction_element_name);
             }
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_history, parent, false);
-            ViewHolder viewHolder = new ViewHolder((TextView) view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_transaction_element, parent, false);
+            ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
         }
 
@@ -92,7 +125,13 @@ public class HistoryActivity extends AppCompatActivity {
         public int getItemCount() {
             return jsonArray.length();
         }
+
+        /*public setNewTransaction (JSONArray update) {
+            notifyDataSetChanged();
+        }*/
+
     }
+
 
 }
 
