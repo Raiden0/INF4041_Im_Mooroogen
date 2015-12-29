@@ -50,7 +50,7 @@ public class GetTransaction extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_GET_TRANSACTIONS.equals(action)) {
-                Log.d(TAG,"Thread Service name:"+Thread.currentThread().getName()+" Handle.");
+                //Log.d(TAG,"Thread Service name:"+Thread.currentThread().getName()+" Handle.");
                 handleActionGetTransaction();
             }
         }
@@ -62,15 +62,13 @@ public class GetTransaction extends IntentService {
         URL url;
         try {
             url = new URL("http://binouze.fabrigli.fr/bieres.json");
-            //url = new URL("https://github.com/Raiden0/INF4041_Im_Mooroogen/blob/master/transaction.json");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             if (HttpURLConnection.HTTP_OK ==conn.getResponseCode()) {
                 copyInputStreamToFile(conn.getInputStream(),
-                        //new File(getCacheDir(), "bieres.json")
                         new File(getCacheDir(), "transaction.json")
                 );
-                Log.d(TAG, "JSON downloaded");
+                //Log.d(TAG, "JSON downloaded");
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(this)
                                 .setSmallIcon(R.drawable.unknown)

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -54,9 +55,9 @@ public class HistoryActivity extends AppCompatActivity {
         });
 
         IntentFilter intentFilter = new IntentFilter(BIERS_UPDATE);
-        LocalBroadcastManager.getInstance(this).registerReceiver(new BierUpdate(), intentFilter);
+        LocalBroadcastManager.getInstance(this).registerReceiver(new TransactionUpdate(), intentFilter);
 
-        mJsonArray = getMontantFromFile();
+        mJsonArray = getTransactionFromFile();
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -65,17 +66,17 @@ public class HistoryActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public class BierUpdate extends BroadcastReceiver {
+    public class TransactionUpdate extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG,getIntent().getAction());
-
+            //Log.d(TAG,getIntent().getAction());
+            MyAdapter myAdapter = (MyAdapter) mRecyclerView.getAdapter();
+            myAdapter.setNewTransaction(getTransactionFromFile());
         }
     }
 
-    public JSONArray getMontantFromFile() {
+    public JSONArray getTransactionFromFile() {
         try {
-            //InputStream is = new FileInputStream(getCacheDir()+"/"+"bieres.json");
             InputStream is = new FileInputStream(getCacheDir()+"/"+"transaction.json");
             byte[] buffer = new byte[is.available()];
             is.read(buffer);
@@ -116,9 +117,11 @@ public class HistoryActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            JSONObject jsonObject;
             try {
-                holder.mTextView.setText(jsonArray.getString(position));
+                jsonObject = (JSONObject) jsonArray.get(position);
+                holder.mTextView.setText(jsonObject.getString("name"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -129,9 +132,10 @@ public class HistoryActivity extends AppCompatActivity {
             return jsonArray.length();
         }
 
-        /*public setNewTransaction (JSONArray update) {
-            notifyDataSetChanged();
-        }*/
+        public void setNewTransaction (JSONArray update) {
+            this.jsonArray = update;
+            this.notifyDataSetChanged();
+        }
     }
 
 
