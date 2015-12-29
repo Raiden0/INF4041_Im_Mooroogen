@@ -129,7 +129,6 @@ public class HistoryActivity extends AppCompatActivity {
         /*public setNewTransaction (JSONArray update) {
             notifyDataSetChanged();
         }*/
-
     }
 
 

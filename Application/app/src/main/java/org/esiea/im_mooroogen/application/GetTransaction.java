@@ -59,7 +59,7 @@ public class GetTransaction extends IntentService {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void handleActionGetTransaction() {
         Log.d(TAG, "Thread Service name:"+Thread.currentThread().getName());
-        URL url = null;
+        URL url;
         try {
             url = new URL("http://binouze.fabrigli.fr/bieres.json");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
