@@ -75,7 +75,8 @@ public class HistoryActivity extends AppCompatActivity {
 
     public JSONArray getMontantFromFile() {
         try {
-            InputStream is = new FileInputStream(getCacheDir()+"/"+"bieres.json");
+            //InputStream is = new FileInputStream(getCacheDir()+"/"+"bieres.json");
+            InputStream is = new FileInputStream(getCacheDir()+"/"+"transaction.json");
             byte[] buffer = new byte[is.available()];
             is.read(buffer);
             is.close();
@@ -92,6 +93,8 @@ public class HistoryActivity extends AppCompatActivity {
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         private JSONArray jsonArray;
+
+
 
         public MyAdapter(JSONArray jsonArray) {
             this.jsonArray = jsonArray;

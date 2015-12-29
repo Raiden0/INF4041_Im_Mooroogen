@@ -62,11 +62,13 @@ public class GetTransaction extends IntentService {
         URL url;
         try {
             url = new URL("http://binouze.fabrigli.fr/bieres.json");
+            //url = new URL("https://github.com/Raiden0/INF4041_Im_Mooroogen/blob/master/transaction.json");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             if (HttpURLConnection.HTTP_OK ==conn.getResponseCode()) {
                 copyInputStreamToFile(conn.getInputStream(),
-                        new File(getCacheDir(), "bieres.json")
+                        //new File(getCacheDir(), "bieres.json")
+                        new File(getCacheDir(), "transaction.json")
                 );
                 Log.d(TAG, "JSON downloaded");
                 NotificationCompat.Builder mBuilder =
