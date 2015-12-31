@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Gestion de budget</string>
     <string name="action_settings">Paramètres</string>
-    <string name="action_download">Téléchargement json</string>
+    <string name="action_download">Télécharger relevé</string>
     <string name="obj">BUDGET DU MOIS</string>
     <string name="title_activity_history">Historique</string>
     <string name="title_activity_add_paid">Ajout d\'un paiement</string>

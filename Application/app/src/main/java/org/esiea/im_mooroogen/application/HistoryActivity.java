@@ -45,12 +45,13 @@ public class HistoryActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        final Context context = getApplicationContext();
+        //final Context context = getApplicationContext();
         TextView ddl_btn = (TextView) findViewById(R.id.telechargement);
         ddl_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GetTransaction.startActionGet(context);
+                //GetTransaction.startActionGet(context);
+                finish();
             }
         });
 

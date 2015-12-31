@@ -7,8 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static org.esiea.im_mooroogen.application.ObjectifActivity.*;
 
 public class AddPaidActivity extends AppCompatActivity {
 
@@ -21,6 +24,7 @@ public class AddPaidActivity extends AppCompatActivity {
 
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
 
         TextView annuler = (TextView) findViewById(R.id.cancel_button);
         annuler.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +41,6 @@ public class AddPaidActivity extends AppCompatActivity {
                 Context context = getApplicationContext();
                 CharSequence text = "Ajout d'un paiement";
                 int duration = Toast.LENGTH_SHORT;
-
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
                 finish();
