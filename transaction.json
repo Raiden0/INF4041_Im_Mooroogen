@@ -1,4 +1,6 @@
 [{"id":1,"name":"Carrefour","montant":78.2},
 {"id":2,"name":"Micromania","montant":39.99},
 {"id":3,"name":"Boucherie primeur","montant":20.56},
-{"id":4,"name":"Chez Marvan","montant":6.5}]
+{"id":4,"name":"Chez Marvan","montant":6.50},
+{"id":5,"name":"Coiffeur","montant":16.20},
+{"id":6,"name":"Mac Donald's","montant":8.80}]
